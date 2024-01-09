@@ -1,13 +1,14 @@
+const path = require('path');
 const express = require('express');
+const dotenv = require('dotenv');
+
+dotenv.config({path : path.resolve(__dirname, '../.env')});
 
 const app = express();
 app.use(express.json());
 
-const PORT = process.env.PORT || 3000;
-const DEBUG = process.env.DEBUG || true;
-
-app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
+app.listen(process.env.SERVER_PORT, () => {
+    console.log(`Server listening on port ${process.env.SERVER_PORT}`);
 });
 
 app.get('/status', (request, response) => {
@@ -25,7 +26,7 @@ app.post('/shorten', (request, response) => {
 
    //console.log(long_url);
 
-   if(DEBUG)
+   if(process.env.SERVER_DEBUG)
    {
       const fs = require('fs');
 
