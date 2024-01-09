@@ -20,20 +20,20 @@ const get_urls = async () => {
         console.error('Error executing query:', error);
         return [];
     }finally{
-        pool.end();
+        // pool.end();
     }
 };
 
-const get_url = async (url_key) => {
+const get_url = async (long_url) => {
     try{
         // ? instead of ${url_key} Avoids SQL injections
-        const [result] = await pool.query(`SELECT * FROM urls WHERE url_key = ?`, [url_key]);
+        const [result] = await pool.query(`SELECT * FROM urls WHERE long_url = ?`, [long_url]);
         return result[0];
     }catch(error){
         console.error('Error executing query:', error);
         return undefined;
     }finally{
-        pool.end();
+        // pool.end();
     }
 };
 
@@ -41,44 +41,50 @@ const get_url = async (url_key) => {
 const create_url = async (url_key, long_url, short_url) => {
     try{
         await pool.query(`INSERT INTO urls () VALUES (?, ?, ?)`, [url_key, long_url, short_url]);
+        return true;
     }catch(error){
         console.error('Error executing query:', error);
+        return false;
     }finally{
-        pool.end();
+        // pool.end();
     }
 };
 
 // TODO: This does not return for now, perhaps it should return the recently deleted item
-const delete_url = async (url_key) =>{
+const delete_url = async (long_url) =>{
     try{
-        await pool.query(`DELETE FROM urls WHERE url_key = ?`, [url_key]);
+        await pool.query(`DELETE FROM urls WHERE long_url = ?`, [long_url]);
     }catch(error){
         console.error('Error executing query:', error);
     }finally{
-        pool.end();
+        // pool.end();
     }
 };
 
-// // Select all
+/* For Testing
+
+// Select all
 (async () => {
     const urls = await get_urls();
     console.log(urls);
 })();
 
-// // Select one
-// (async () => {
-//     const url = await get_url("hello");
-//     console.log(url);
-// })();
+// Select one
+(async () => {
+    const url = await get_url("hello");
+    console.log(url);
+})();
 
 // Create
-// (async () => {
-//     await create_url("daeref", "https://www.facebook.com/daeref345456wfdfgsdgfgf", "https://www.facebook.com/daeref");
-// })();
+(async () => {
+    await create_url("daeref", "https://www.facebook.com/daeref345456wfdfgsdgfgf", "https://www.facebook.com/daeref");
+})();
 
 // Delete
-// (async () => {
-//     await delete_url("daeref");
-// })();
+(async () => {
+    await delete_url("daeref");
+})();
 
-module.exports = {get_urls, get_url, create_url, delete_url};
+*/
+
+module.exports = { get_urls, get_url, create_url, delete_url};

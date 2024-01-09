@@ -2,9 +2,9 @@
   "name": "url-shortner-backend",
   "version": "1.0.0",
   "description": "An API to shorten long urls and use them instead of the long version.\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[the short version instead of the long one.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/server.js"
   },
   "author": "Mzukisi Makaluza",
   "license": "GPL-3.0-or-later",
@@ -12,5 +12,8 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "mysql2": "^3.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
   }
 }

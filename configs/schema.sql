@@ -3,8 +3,8 @@ CREATE DATABASE url_shortener;
 USE url_shortener;
 
 CREATE TABLE urls (
-    url_key VARCHAR(255) PRIMARY KEY,
-    long_url VARCHAR(1024) NOT NULL,
+    url_key VARCHAR(128) NOT NULL,
+    long_url VARCHAR(512) PRIMARY KEY NOT NULL,
     short_url VARCHAR(255) NOT NULL
 );
 
